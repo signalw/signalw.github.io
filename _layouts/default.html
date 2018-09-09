@@ -1,27 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="shortcut icon" type="image/x-ico" href="/images/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/share.min.css">
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/jquery.share.min.js"></script>
+        {% if page.title %}
+        <title>{{ page.title }} | {{ site.title }}</title>
+        {% else %}
+        <title>{{ site.title }}</title>
+        {% endif %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row row-header">
+                <div class="col-md-6 col-md-offset-3">
+                    <ul class="list-inline list-nav">
+                        <li><a href="/"><b>{{site.title}}</b></a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                </div>
+            </div>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-<head>
-   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>{{ page.title }}</title>
-   <meta name="author" content="<%= @page.author %>" />
-
-   <!-- CodeRay syntax highlighting CSS -->
-   <link rel="stylesheet" href="/css/coderay.css" type="text/css" />
-
-   <!-- Homepage CSS -->
-   <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
-</head>
-<body>
-
-<div class="site">
-  <div class="title">
-    Tom Preston-Werner
-  </div>
-  
-  {{ content }}
-</div>
-
-</body>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-main">
+                    {{content}}
+                </div>
+            </div>
+        </div>
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    </body>
 </html>

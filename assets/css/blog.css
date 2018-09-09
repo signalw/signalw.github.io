@@ -1,0 +1,102 @@
+body {
+    background-color: #fefefe;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    background: #fdfdfd;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+h1 { font-size: 1.6em; margin: 2.5em 0 10px 0; }
+h2 { font-size: 1.2em; font-weight: 400; }
+
+a         { color: #008080; text-decoration: none; }
+a:hover   { color: #d14; text-decoration: none; }
+
+b { font-weight: 400; }
+
+strong {
+    font-weight: bold;
+}
+
+code {
+    background: #f1f1f1;
+    color: #555;
+}
+
+blockquote {
+    color: #555;
+    font-size: 14px;
+}
+
+.gray { color: #ccc; }
+.pink { color: deeppink;}
+
+/* ------------------------------------------------ */
+
+.row-header {
+    background-size: cover;
+    margin-bottom: 2em;
+    padding: 1em 0 0em 0;
+}
+
+@media screen and (max-width: 42em) {
+  .row-header { padding: 1rem 0 1rem 0; }
+}
+
+.row-header .list-nav a {
+    line-height: 2em;
+}
+
+.row-header .list-nav b {
+    line-height: 2em;
+}
+
+.col-main {
+    padding-bottom: 60px;
+}
+
+/* ------------------------------------------------ */
+
+ul.posts {
+    list-style: none;
+    padding: 0 0 15px 0;
+}
+
+.posts > li {
+    padding: 0 0 8px 0;
+}
+
+.posts a.title {
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+/*= for single */
+
+.content pre {
+    margin-bottom: 15px;
+    display: block;
+    background: #444;
+    margin: 15px 0 15px 0;
+    color: #fff;
+    font-family: monospace;
+    line-height: 19px;
+    padding: 0.9em;
+    overflow: auto;
+}
+
+.content img {
+    max-width: 100%;
+}
+
+.content ul {
+    list-style: circle;
+    padding-left: 20px;
+}
+
+.content ol {
+    list-style: decimal;
+    padding-left: 20px;
+}

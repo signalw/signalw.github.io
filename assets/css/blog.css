@@ -11,8 +11,8 @@ h1, h2, h3, h4, h5, h6 { font-size: 100%; }
 h1 { font-size: 1.6em; margin: 2.5em 0 10px 0; }
 h2 { font-size: 1.2em; font-weight: 400; }
 
-a         { color: #A30052; text-decoration: none; }
-a:hover   { color: #003DF5; text-decoration: none; }
+a         { color: #008080; text-decoration: none; }
+a:hover   { color: #d14; text-decoration: none; }
 
 b { font-weight: 400; }
 
@@ -99,42 +99,4 @@ ul.posts {
 .content ol {
     list-style: decimal;
     padding-left: 20px;
-}
-
-.social-sharing {
-    padding: 3em 0 3em 0;
-}
-
-/*= for comments */
-
-.comments {
-    padding: 20px 0 0 0;
-}
-
-.comments h3 {
-    display: none;
-}
-
-.comments hr {
-    height: 1px;
-}
-
-.comments #dsq-pagination, #dsq-sort-by {
-    display: none;
-}
-
-.comments .dsq-comment-message {
-    font: 12px;
-}
-
-/*= social */
-
-.social-share .social-share-icon {
-    margin: 0 8px 0 0;
-}
-
-/*= mathjax */
-
-li > .MJXc-display {
-    display: inline;
 }

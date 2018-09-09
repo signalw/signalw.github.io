@@ -4,10 +4,14 @@ title: About
 permlink: /about
 ---
 
-github: <http://github.com/fleurer>
+github: <http://github.com/signalw>
 
-zhihu: <https://www.zhihu.com/people/fleurer>
+facebook: <https://www.facebook.com/signalwxh>
 
-douban: <https://www.douban.com/people/fleure/>
+linkedin: <https://www.linkedin.com/in/xinhaowang>
 
-email/gt: me.ssword@gmail.com
+weibo: <https://www.weibo.com/u/1348273745>
+
+email: 651407694@qq.com
+
+Also feel free to open an issue to this repository if you want to discuss anything

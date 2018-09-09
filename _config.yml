@@ -1,16 +1,3 @@
-# Site settings
-title: F叔的学习笔记
-email: me.ssword@gmail.com
-description: ""
-baseurl: ""
-author_name: 'fleuria'
-
-# Build settings
-markdown: kramdown
-permalink: pretty
-
-highlighter: rouge
-kramdown:
-  input: GFM
-  auto_ids: true
-  syntax_highlighter: rouge
+title: 信手随笔
+email: 651407694@qq.com
+author_name: 'signalw'

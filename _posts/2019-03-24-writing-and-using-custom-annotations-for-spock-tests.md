@@ -50,8 +50,7 @@ First, define these tags. Functional test is a broad category. I choose to assig
 
 Then, create an abstract base class that the spcific annotations can extend from.
 ```
-abstract class BaseTestExtension<T extends Annotation> extends AbstractAnnotationDrivenExtension
-        implements IAnnotationDrivenExtension<T> {
+abstract class BaseTestExtension<T extends Annotation> extends AbstractAnnotationDrivenExtension implements IAnnotationDrivenExtension<T> {
 
     String alias
 

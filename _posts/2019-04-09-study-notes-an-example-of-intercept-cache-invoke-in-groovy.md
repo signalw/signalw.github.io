@@ -58,10 +58,28 @@ The smart part is how the implementation is created and cached for an unknown me
 Now, you can actually use the logger. For all undefined methods, this logger will create a new logging level and log it with this level.
 ```
 Logger logger = Logger.getLogger(this.class.name)
+logger.info("Just FYI")
 logger.ok("I guess I'm all right")
 logger.terrible("holy shit")
 logger.sleeping("good night")
 logger.sleeping("sweet dreams")
+```
+
+Here's the output:
+```
+Apr 09, 2019 7:01:48 PM java_util_logging_Logger$info$0 call
+INFO: Just FYI
+inside methodMissing with ok
+Apr 09, 2019 7:01:48 PM org.codehaus.groovy.reflection.CachedMethod invoke
+OK: I guess I'm all right
+inside methodMissing with terrible
+Apr 09, 2019 7:01:48 PM org.codehaus.groovy.reflection.CachedMethod invoke
+TERRIBLE: holy shit
+inside methodMissing with sleeping
+Apr 09, 2019 7:01:48 PM org.codehaus.groovy.reflection.CachedMethod invoke
+SLEEPING: good night
+Apr 09, 2019 7:01:48 PM java_util_logging_Logger$log$1 call
+SLEEPING: sweet dreams
 ```
 
 Note that when an undefined method is called twice, only the first time will the debug message appear. 

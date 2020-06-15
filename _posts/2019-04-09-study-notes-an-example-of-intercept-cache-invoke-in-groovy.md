@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Extra Logging Levels using Groovy's Intercept-Cache-Invoke Design Pattern"
+title: "Extra logging levels using Groovy's Intercept-Cache-Invoke design pattern (study notes)"
 ---
 
-This article is inspired by, or basically copied from, a demo from [Ken Kousen](http://www.kousenit.com/) where he demonstrated the use of `metaClass` and the Intercept-Cache-Invoke design pattern of Groovy. With this design pattern, you can call methods on a class where the methods aren't even defined. The trick is to override the `methodMissing` method on the `metaClass`, and handle it in whatever ways you want.
+This article is inspired by a demo from [Ken Kousen](https://www.kousenit.com) where he demonstrated the use of `metaClass` and the Intercept-Cache-Invoke design pattern of Groovy. With this design pattern, you can call methods on a class where the methods aren't even defined. The trick is to override the `methodMissing` method on the `metaClass`, and handle it in whatever ways you want.
 
 An example here is to add more logging levels to the Java's default logging component. The existing levels include:
 * SEVERE

@@ -12,12 +12,12 @@ Continuous delivery (CD) is a way of building software such that it can be deplo
 You should be able to select the version of software you want, without worrying it is going to break. Nothing should ever break in a continuous delivery setup. If it does break, it should be the exception and not the rule.
 
 ## Process:
-0) Continuous delivery server picks up code from CI.
-1) It starts by deploying your software to a testing environment that mirrors production. 
-2) It runs the automated acceptance tests, which ensure that the software requirements have been met and also serve as a set of regression tests. 
-3) When the acceptance tests are passing, then any non-functional automated tests can be run, e.g. load testing, in-depth security audits.
-4) Once the automated tests have passed, downstream teams can deploy the software to a testing environment and perform any required manual tasks such as user acceptance testing.
-5) Assuming the software passes all manual tests, then it's ready to deploy to production.
+0. Continuous delivery server picks up code from CI.
+1. It starts by deploying your software to a testing environment that mirrors production. 
+2. It runs the automated acceptance tests, which ensure that the software requirements have been met and also serve as a set of regression tests. 
+3. When the acceptance tests are passing, then any non-functional automated tests can be run, e.g. load testing, in-depth security audits.
+4. Once the automated tests have passed, downstream teams can deploy the software to a testing environment and perform any required manual tasks such as user acceptance testing.
+5. Assuming the software passes all manual tests, then it's ready to deploy to production.
 
 ## Benefits:
 * Inceased quality

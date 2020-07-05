@@ -6,7 +6,6 @@ title: "Basics about DevOps (study notes)"
 Notes taken from a [DevOps course](https://cloudacademy.com/course/introduction-to-devops) by Ben Lambert.
 
 ## What is DevOps?
-
 There isn't consensus on a single definition on DevOps. But the lack of any standard definition doesn't detract from its value. Because DevOps is a philosophy. It's the philosophy of the efficient development, deployment, and operation of the highest quality software possible.
 
 ## Three Tenets:

@@ -5,7 +5,7 @@ title: "Deploy a Misskey instance on Heroku"
 
 Misskey, a decentralized social networking platform, is part of Fediverse. Other well-known platforms are Pleroma, Mastodon, etc. Out of curiosity, I started out and deployed an instance on Heroku, which turns out to be really easy. Here I will document the steps. 
 
-As of right now, the latest version is 12.47.1. If you just want a deployment without installing any development tools, all you need it Git and Heroku command line. 
+As of right now, the latest version is 12.47.1. If you just want a deployment without installing any development tools, all you need is Git and Heroku command line. 
 
 ```bash
 $ git clone https://github.com/syuilo/misskey

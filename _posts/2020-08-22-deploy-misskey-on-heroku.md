@@ -102,8 +102,8 @@ Once the files are updated, just make sure `.config/default.yml` and `Procfile` 
 
 ```bash
 $ git diff .gitignore
--!/.config/default.yml
-+!/.config/example.yml
+-!/.config/example.yml
++!/.config/default.yml
 
 $ git add .
 $ git commit -m "Initial commit"

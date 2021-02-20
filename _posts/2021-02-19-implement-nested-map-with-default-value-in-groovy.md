@@ -14,7 +14,7 @@ m['a']['b']['c'] = 1
 
 Here, I find the workarounds below can be useful if you don't want to do the initialization or don't want to worry about key existance.
 
-#### Method 1: `withDefault` method
+### Method 1: `withDefault` method
 If you already know how deep your nested Map will be, you can directly use multiple `withDefault` methods and put an empty Map in closure.
 
 ```
@@ -35,7 +35,7 @@ assert m == [a: [b: [c: [d: 1]]]]
 
 This of course is not ideal if you want the Map to go arbitrarily deep
 
-#### Method 2: Modify `getAt` method on `LinkedHashMap` MetaClass
+### Method 2: Modify `getAt` method on `LinkedHashMap` MetaClass
 This approach allows you to go as deep as you want, but the limitation is that all of your keys have to be either `String` or non-`String`. Also remember that the dot notation won't work.
 
 ```
@@ -64,7 +64,7 @@ m[1][2][3.3] = 'a'
 assert m == [1:[2:[3.3:'a']]]
 ```
 
-#### Method 3: Create a custom class that extends `LinkedHashMap`, then override `get` method
+### Method 3: Create a custom class that extends `LinkedHashMap`, then override `get` method
 You can create a new class in exchange for some flexibility.
 ```
 class DefaultMap extends LinkedHashMap {
@@ -81,7 +81,7 @@ m['a']['b']['c'] = 1
 assert m == [a: [b: [c: 1]]]
 ```
 
-#### Method 4: Add a new method on `LinkedHashMap` MetaClass
+### Method 4: Add a new method on `LinkedHashMap` MetaClass
 This works fine if you don't need subscript operator or dot notation.
 ```
 LinkedHashMap.metaClass.customGet = { k ->

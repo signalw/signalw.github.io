@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Submit an Arbitrary Number of Coroutines in Asyncio Event Loop during Runtime"
+title: "Submit an arbitrary number of coroutines in asyncio event loop during runtime"
 ---
 
 ## Asyncio

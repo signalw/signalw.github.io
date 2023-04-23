@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Replace Postman Collection Runner with `curl` and `jq`"
+title: "Replace Postman Collection Runner with curl and jq"
 ---
 
 If you work with API, chances are that you use [Postman](https://www.postman.com). I have been using it for quite some time. But recently while I was using its Collection Runner to reproduce a bug, I noticed that, with a free plan, it only gives you a limited number of runs each month. Postman is a great product and they have every right to make money on it. Personally I am not willing to upgrade to a paid plan anytime soon. That means I have to find something else to meet my needs.

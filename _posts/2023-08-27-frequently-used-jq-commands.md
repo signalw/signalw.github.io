@@ -187,39 +187,3 @@ $ cat | jq ".items | sort_by(.name)" << ---
   }
 ]
 ```
-
-#### Filter an array of objects:
-```
-$ cat | jq ".items | sort_by(.name)" << ---
-{
-  "items": [
-    {
-      "name": "hello",
-      "createdBy": "tom"
-    },
-    {
-      "name": "hi",
-      "createdBy": "tom"
-    },
-    {
-      "name": "bye",
-      "createdBy": "jerry"
-    }
-  ]
-}
----
-[
-  {
-    "name": "bye",
-    "createdBy": "jerry"
-  },
-  {
-    "name": "hello",
-    "createdBy": "tom"
-  },
-  {
-    "name": "hi",
-    "createdBy": "tom"
-  }
-]
-```

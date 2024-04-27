@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SIGNALW</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on SIGNALW</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Apr 2024 00:00:00 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Combine multiple Git repositories and keep their histories</title>
+      <link>http://localhost:1313/posts/2024-04-21-combine-git-repos-keep-history/</link>
+      <pubDate>Sun, 21 Apr 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-04-21-combine-git-repos-keep-history/</guid>
+      <description>You may run into situations where multiple Git repositories need to be merged. For us, it is driven by a conclusion that several separate but related services can be combined into one merged service that handles multiple context paths.&#xA;Obviously, we would like to keep the commit histories when combining our services. This can be essentially achieved by creating a merge commit that connects the repos together.&#xA;To use an oversimplified example, let&amp;rsquo;s say we have two Git repositories, &amp;ldquo;repo1&amp;rdquo; and &amp;ldquo;repo2&amp;rdquo;, and we want to move all the content in &amp;ldquo;repo2&amp;rdquo; into &amp;ldquo;repo1&amp;rdquo;.</description>
+    </item>
+    <item>
+      <title>Build Java application with OpenJDK 1.8 inside a docker container</title>
+      <link>http://localhost:1313/posts/2024-03-23-java-build-with-openjdk-1.8-in-container/</link>
+      <pubDate>Sat, 23 Mar 2024 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2024-03-23-java-build-with-openjdk-1.8-in-container/</guid>
+      <description>If you write and build Java applications a lot, in this day of age, chances are that you may be building applications with different versions of Java. While there are a lot of solutions to maintain and switch between multiple JDK versions in your local environment, if you only need to perform a one-off task with a specific version, it is not always worth it if you may never use it again in the near future.</description>
+    </item>
+    <item>
+      <title>Frequently used jq commands</title>
+      <link>http://localhost:1313/posts/2023-08-27-frequently-used-jq-commands/</link>
+      <pubDate>Sun, 27 Aug 2023 00:00:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-08-27-frequently-used-jq-commands/</guid>
+      <description>As we deal with JSON data a lot. jq is a must-have tool that allows you to work with them more efficiently. It is useful when you want to extract particular information of interest. Here I am documenting some example commands that our team use quite frequently for our daily tasks.&#xA;Of course, jq is capable of more than these. For a full list of what it can do, refer to its official documentation: https://jqlang.</description>
+    </item>
+    <item>
+      <title>Replace Postman Collection Runner with curl and jq</title>
+      <link>http://localhost:1313/posts/2023-04-22-replace-postman-collection-runner-with-curl-and-jq/</link>
+      <pubDate>Sat, 22 Apr 2023 19:19:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2023-04-22-replace-postman-collection-runner-with-curl-and-jq/</guid>
+      <description>If you work with API, chances are that you use Postman. I have been using it for quite some time. But recently while I was using its Collection Runner to reproduce a bug, I noticed that, with a free plan, it only gives you a limited number of runs each month. Postman is a great product and they have every right to make money on it. Personally I am not willing to upgrade to a paid plan anytime soon.</description>
+    </item>
+    <item>
+      <title>Submit an arbitrary number of coroutines in asyncio event loop during runtime</title>
+      <link>http://localhost:1313/posts/2021-12-29-asyncio-arbitrary-number-of-coroutines-during-runtime/</link>
+      <pubDate>Wed, 29 Dec 2021 17:04:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-12-29-asyncio-arbitrary-number-of-coroutines-during-runtime/</guid>
+      <description>Asyncio Python package asyncio allows the script to be executed concurrently. This package is suitable for IO-bound network code, e.g., elimating the busy waiting part when making an API request.&#xA;Problem As I adopt asyncio-related packages in some projects, a need occurred that an arbitrary number of coroutines should be executed during runtime. The coroutine will be called inside an infinite loop when certain condition is met.&#xA;Solution By looking through the documentations, it is not easy to achieve that logic by using ascynio package itself.</description>
+    </item>
+    <item>
+      <title>GitOps (study notes)</title>
+      <link>http://localhost:1313/posts/2021-03-18-study-notes-gitops/</link>
+      <pubDate>Thu, 18 Mar 2021 18:58:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-03-18-study-notes-gitops/</guid>
+      <description>What is GitOps? First coined by the team at WeaveWorks who formalized several of their own daily patterns and processes to empower high velocity cloud native application deployments into Kubernetes clusters.&#xA;GitOps Benefits (for Kubernetes Deployments): Enhanced developer productivity - the only access the developer ever needed to get an application into the cluster was write access into the Git repo. Enhanced operations - Kubernetes can be configured with Flux Operator to periodically look inward into Git and have the cluster continually converge on the declared state held within Git.</description>
+    </item>
+    <item>
+      <title>Implement nested Map with default value as empty Map in Groovy</title>
+      <link>http://localhost:1313/posts/2021-02-19-implement-nested-map-with-default-value-in-groovy/</link>
+      <pubDate>Fri, 19 Feb 2021 22:53:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2021-02-19-implement-nested-map-with-default-value-in-groovy/</guid>
+      <description>Groovy does not have support for nested Map with default value out of the box. So in order to insert values in a nested Map, where the ancestor keys do not exist yet, you have to initialize them first. Otherwise, you will get a NullPointerException, e.g.:&#xA;def m = [:] m[&amp;#39;a&amp;#39;][&amp;#39;b&amp;#39;][&amp;#39;c&amp;#39;] = 1 //java.lang.NullPointerException: Cannot get property &amp;#39;b&amp;#39; on null object // at Script1.run(Script1.groovy:2) Here, I find the workarounds below can be useful if you don&amp;rsquo;t want to do the initialization or don&amp;rsquo;t want to worry about key existance.</description>
+    </item>
+    <item>
+      <title>Deploy a Misskey instance on Heroku</title>
+      <link>http://localhost:1313/posts/2020-08-22-deploy-misskey-on-heroku/</link>
+      <pubDate>Sat, 22 Aug 2020 13:14:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-08-22-deploy-misskey-on-heroku/</guid>
+      <description>Misskey, a decentralized social networking platform, is part of Fediverse. Other well-known platforms are Pleroma, Mastodon, etc. Out of curiosity, I started out and deployed an instance on Heroku, which turns out to be really easy. Here I will document the steps.&#xA;As of right now, the latest version is 12.47.1. If you just want a deployment without installing any development tools, all you need is Git and Heroku command line.</description>
+    </item>
+    <item>
+      <title>Basics about Continuous Delivery (study notes)</title>
+      <link>http://localhost:1313/posts/2020-07-05-study-notes-cd-basics/</link>
+      <pubDate>Sun, 05 Jul 2020 15:49:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-07-05-study-notes-cd-basics/</guid>
+      <description>Notes taken from a CD course by Ben Lambert.&#xA;What is continuous delivery? Continuous delivery (CD) is a way of building software such that it can be deployed to a specified environment, whenever you want to and deploy only the highest quality versions to production. In particular, you should be able to deploy to production and ideally with one command or a push of a button.&#xA;You should be able to select the version of software you want, without worrying it is going to break.</description>
+    </item>
+    <item>
+      <title>Basics about DevOps (study notes)</title>
+      <link>http://localhost:1313/posts/2020-06-14-study-notes-devops-intro/</link>
+      <pubDate>Sun, 14 Jun 2020 19:49:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-06-14-study-notes-devops-intro/</guid>
+      <description>Notes taken from a DevOps course by Ben Lambert.&#xA;What is DevOps? There isn&amp;rsquo;t consensus on a single definition on DevOps. But the lack of any standard definition doesn&amp;rsquo;t detract from its value. Because DevOps is a philosophy. It&amp;rsquo;s the philosophy of the efficient development, deployment, and operation of the highest quality software possible.&#xA;Three Tenets: Culture Culture requires the removal of silos (Dev/Test/Security/Ops) in favor of high collaboration, e.g. cross-functional teams, teams that are responsible for the complete life cycle of a product, where everyone works towards a common set of goals.</description>
+    </item>
+    <item>
+      <title>Loading resources inside a jar</title>
+      <link>http://localhost:1313/posts/2020-06-03-loading-resources-inside-a-jar/</link>
+      <pubDate>Wed, 03 Jun 2020 11:37:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2020-06-03-loading-resources-inside-a-jar/</guid>
+      <description>Recently I encountered an issue that happens only when running inside a jar. Our non-spring test application has an arbitrary number of resouce files that need to be read and parsed. We&amp;rsquo;ve been using class loaders, to read either files or folders, and it worked pretty well, until we put our application inside a jar. We noticed that for some reason, the jar just can&amp;rsquo;t read folders by simply using class loaders.</description>
+    </item>
+    <item>
+      <title>Extra logging levels using Groovy&#39;s Intercept-Cache-Invoke design pattern</title>
+      <link>http://localhost:1313/posts/2019-04-09-study-notes-an-example-of-intercept-cache-invoke-in-groovy/</link>
+      <pubDate>Tue, 09 Apr 2019 14:35:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-04-09-study-notes-an-example-of-intercept-cache-invoke-in-groovy/</guid>
+      <description>This article is inspired by a demo from Ken Kousen where he demonstrated the use of metaClass and the Intercept-Cache-Invoke design pattern of Groovy. With this design pattern, you can call methods on a class where the methods aren&amp;rsquo;t even defined. The trick is to override the methodMissing method on the metaClass, and handle it in whatever ways you want.&#xA;An example here is to add more logging levels to the Java&amp;rsquo;s default logging component.</description>
+    </item>
+    <item>
+      <title>Writing and using custom annotations for Spock tests</title>
+      <link>http://localhost:1313/posts/2019-03-24-writing-and-using-custom-annotations-for-spock-tests/</link>
+      <pubDate>Sun, 24 Mar 2019 16:55:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2019-03-24-writing-and-using-custom-annotations-for-spock-tests/</guid>
+      <description>Spock framework, just like Groovy, is hightly extensible. In our integration test suite, there&amp;rsquo;s a need of categorizing the tests into different types, say &amp;ldquo;smoke test&amp;rdquo;, &amp;ldquo;functional test&amp;rdquo;, &amp;ldquo;deployment test&amp;rdquo;, etc. Although it saves a lot of trouble if different types of tests are written in different specification files, tagging some tests inside one specification better fits our needs. It is actually not that difficult to implement. Spock already has a great documentation on how to write custom annotations.</description>
+    </item>
+    <item>
+      <title>Thoughts after reading Frankenstein</title>
+      <link>http://localhost:1313/posts/2018-09-16-frankenstein-review/</link>
+      <pubDate>Sun, 16 Sep 2018 19:34:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2018-09-16-frankenstein-review/</guid>
+      <description>Because of the terrible weather brought by the hurricane and not being able to go anywhere, I stayed home and finished Frankenstein, which I had been putting off for several months. I was attracted to this book because I felt that its writing background was somewhat similar to today. Although the monsters created in the book were unreal at that time, today, we also have science fiction films such as The Terminator, Ex Machina, Her, etc.</description>
+    </item>
+    <item>
+      <title>Running order of setup and cleanup methods in spock framework</title>
+      <link>http://localhost:1313/posts/2018-09-07-setup-cleanup-order-in-spock/</link>
+      <pubDate>Fri, 07 Sep 2018 14:04:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2018-09-07-setup-cleanup-order-in-spock/</guid>
+      <description>So I&amp;rsquo;ve been using spock test framework for a while. From time to time I fall into the tricky part of the running order of the setup and cleanup fixture methods.&#xA;Spock&amp;rsquo;s documentation explains pretty well on what each of its available fixture methods does in the Spock Primer section.&#xA;def setup() {} // run before every feature method def cleanup() {} // run after every feature method def setupSpec() {} // run before the first feature method def cleanupSpec() {} // run after the last feature method If fixture methods are overridden in a specification subclass then setup() of the superclass will run before setup() of the subclass.</description>
+    </item>
+    <item>
+      <title>Install Ruby on CentOS with rbenv</title>
+      <link>http://localhost:1313/posts/2018-06-02-install-ruby-on-centos/</link>
+      <pubDate>Sat, 02 Jun 2018 14:04:00 -0400</pubDate>
+      <guid>http://localhost:1313/posts/2018-06-02-install-ruby-on-centos/</guid>
+      <description>I haven&amp;rsquo;t touched Ruby for a long time. Recently, when I wanted to clone a project on GitHub and build it locally, I found that Ruby was not even available on the newly installed CentOS. That is the reason why this article is written.&#xA;The Ruby official website lists 4 different installation methods:&#xA;Use package management tools, such as Ubuntu&amp;rsquo;s apt-get, CentOS&amp;rsquo;s yum, homebrew commonly used on macOS, etc. Use Ruby-specific installation programs, such as ruby-build, ruby-install, .</description>
+    </item>
+  </channel>
+</rss>

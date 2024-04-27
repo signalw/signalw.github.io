@@ -1,0 +1,466 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Writing and using custom annotations for Spock tests - SIGNALW</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Spock framework, just like Groovy, is hightly extensible. In our integration test suite, there&rsquo;s a need of categorizing the tests into different types, say &ldquo;smoke test&rdquo;, &ldquo;functional test&rdquo;, &ldquo;deployment test&rdquo;, etc. Although it saves a lot of trouble if different types of tests are written in different specification files, tagging some tests inside one specification better fits our needs. It is actually not that difficult to implement. Spock already has a great documentation on how to write custom annotations." />
+  <meta name="author" content="Xinhao Wang" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.svg" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/15502355" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
+  
+  
+
+  
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.125.3">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >SIGNALW</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/signalw"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/xinhaowang"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Writing and using custom annotations for Spock tests</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Mar 24, 2019</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Spock framework, just like Groovy, is hightly extensible. In our integration test suite, there&rsquo;s a need of categorizing the tests into different types, say &ldquo;smoke test&rdquo;, &ldquo;functional test&rdquo;, &ldquo;deployment test&rdquo;, etc. Although it saves a lot of trouble if different types of tests are written in different specification files, tagging some tests inside one specification better fits our needs. It is actually not that difficult to implement. Spock already has a great documentation on how to write custom annotations. There are two types, global extensions and annotation driven local extensions. Here I&rsquo;m going to focus on local extensions.</p>
+<p>The goal is to create <code>@SmokeTest</code>, <code>@FunctionalTest</code>, <code>@Deployment</code> annotations and we get to choose what type of tests to run. Like this,</p>
+<pre tabindex="0"><code>class SampleSpec extends Specification {
+    @SmokeTest
+    def &#39;smoke test&#39;() {
+        expect: 1 == 1
+    }
+    @FunctionalTest
+    def &#39;functional test&#39;() {
+        expect: 1+1 == 2
+    }
+    @DeploymentTest
+    def &#39;deployment test&#39;() {
+        expect: 1*1 == 1
+    }
+}
+</code></pre><p>When this specification is run, we can pipe in a &ldquo;tests&rdquo; parameter to specify which test to run, e.g. <code>--tests=smoke,functional</code>. In cases where the whole specification is tagged with <code>@FunctionalTest</code> and only a few feature methods are tagged with <code>@SmokeTest</code>, you can even use <code>--tests=-smoke,functional</code> to run non-smoke functional tests. Here&rsquo;s how.</p>
+<p>First, define these tags. Functional test is a broad category. I choose to assign a value called <code>subLevel</code> as some functional test are more involving while some are quite straightforward. There are also tests on services of different natural languages. A <code>language</code> variable is added as well.</p>
+<pre tabindex="0"><code>@Retention(RetentionPolicy.RUNTIME)
+@Target([ElementType.TYPE, ElementType.METHOD])
+@ExtensionAnnotation(SmokeTestExtension)
+@interface SmokeTest {}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target([ElementType.TYPE, ElementType.METHOD])
+@ExtensionAnnotation(FunctionalTestExtension)
+@interface FunctionalTest {
+    String subLevel() default &#39;1&#39;
+    String language() default &#39;en&#39;
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target([ElementType.TYPE, ElementType.METHOD])
+@ExtensionAnnotation(StressTestExtension)
+@interface StressTest {}
+</code></pre><p>Then, create an abstract base class that the spcific annotations can extend from.</p>
+<pre tabindex="0"><code>abstract class BaseTestExtension&lt;T extends Annotation&gt; extends AbstractAnnotationDrivenExtension implements IAnnotationDrivenExtension&lt;T&gt; {
+
+    String alias
+
+    @Override
+    void visitSpecAnnotation(T annotation, SpecInfo spec) {
+        for (FeatureInfo feature : spec.features) doVisit(annotation, feature)
+    }
+
+    @Override
+    void visitFeatureAnnotation(T annotation, FeatureInfo feature) {
+        doVisit(annotation, feature)
+    }
+
+    // decide if a feature method should be visited or skipped
+    private void doVisit(T annotation, ISkippable skippable) {
+        def queries = extractValues(filteredTests)
+        skippable.setSkipped(!queries.every { k, v -&gt; annotation.&#34;$k&#34;() in v })
+    }
+
+    // parse an input test string, e.g. smoke,functional(subLevel=1|2&amp;language=en|fr)
+    // define the syntax yourself
+    @Memoized
+    private def extractValues(String tests) {
+        if (!tests) return
+        String query = tests.split(&#39;,&#39;).find { it.startsWith(getAlias()) }
+        query = StringUtils.strip(query ? query.substring(getAlias().length()) : &#39;&#39;, &#39;()&#39;)
+        if (!query) return
+        def queries = query.split(&#39;&amp;&#39;).inject([:]) { map, kv -&gt;
+            def (key, value) = kv.split(&#39;=&#39;)
+            map[key] = StringUtils.split((String) value, &#39;|&#39;)
+            return map
+        }
+        return queries
+    }
+}
+</code></pre><p>The way I control which test to skip or to run is through the <code>doVisit</code> method. The <code>extractValues</code> method take in an input string from the user, e.g. <code>smoke,functional</code> and parse it to decide if a feature method should be visited.</p>
+<p>The actual annotations are defined as simple as this:</p>
+<pre tabindex="0"><code>class SmokeTestExtension extends BaseTestExtension&lt;SmokeTest&gt; {
+    String alias = &#39;smoke&#39;
+}
+</code></pre><pre tabindex="0"><code>class FunctionalTestExtension extends BaseTestExtension&lt;FunctionalTest&gt; {
+    String alias = &#39;functional&#39;
+}
+</code></pre><pre tabindex="0"><code>class DeploymentTestExtension extends BaseTestExtension&lt;DeploymentTest&gt; {
+    String alias = &#39;deployment&#39;
+}
+</code></pre><p>Finally, create a Spock configuration file &ldquo;SpockConfig.groovy&rdquo; in the classpath to map user input into actual annotations.</p>
+<pre tabindex="0"><code>runner {
+
+    String testsRawString = System.getProperty(&#39;tests&#39;, &#39;&#39;)
+    List tests = testsRawString
+            .plus(testsRawString.contains(&#39;deployment&#39;) ? &#39;&#39; : &#39;,-deployment&#39;)
+            .split(&#39;,&#39;)
+            .collect { def m = it =~ /(-?\w+)(\(\S*\))?/; if (m) m.group(1) }
+            .findAll { StringUtils.stripStart((String) it, &#39;-&#39;) in TEST_DEFINITIONS }
+
+    def includedTests = tests
+            .findAll { !it.startsWith(&#39;-&#39;) }
+            .collect { TEST_DEFINITIONS[it] }
+    def excludedTests = tests
+            .findAll { it.startsWith(&#39;-&#39;) }
+            .collect { TEST_DEFINITIONS[it.substring(1)] }
+
+    include(*includedTests)
+    exclude(*excludedTests)
+
+}
+</code></pre><p>Our deployment tests need to be run in a different environment, thus it is turned off by default by appending <code>-deployment</code> to the input string. Of course, the <code>TEST_DEFINITIONS</code> that wires up the input and annotations needs to be defined as well:</p>
+<pre tabindex="0"><code>public static TEST_DEFINITIONS = [
+    &#39;smoke&#39;      : SmokeTest,
+    &#39;functional&#39; : FunctionalTest,
+    &#39;deployment&#39; : DeploymentTest
+]
+</code></pre><p>When everything is put together, you can use option <code>tests=smoke,functional</code> to filter out custom groups of tests that are tagged with the corresponding annotations.</p>
+</section>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <div class="giscus mt-24"></div>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="signalw/signalw.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkxNDgwNTY1ODQ="
+    data-category="Ideas"
+    data-category-id="DIC_kwDOCNMqCM4Ce48P"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script>
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">SIGNALW</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

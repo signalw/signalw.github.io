@@ -1,0 +1,41 @@
+baseURL = 'https://signalw.github.io'
+languageCode = 'en-us'
+title = 'SIGNALW'
+theme = 'paper'
+
+[params]
+  # color style
+  color = 'gray'                           # linen, wheat, gray, light
+
+  # header social icons
+  #twitter = 'YOUR_TWITTER_ID'               # twitter.com/YOUR_TWITTER_ID
+  github = 'signalw'                 # github.com/YOUR_GITHUB_ID
+  #instagram = 'YOUR_INSTAGRAM_ID'           # instagram.com/YOUR_INSTAGRAM_ID
+  linkedin = 'xinhaowang'             # linkedin.com/in/YOUR_LINKEDIN_ID
+  #mastodon = 'YOUR_MASTODON_LINK'           # e.g. 'https://mastodon.instance/@xxx'
+  #threads = '@YOUR_THREADS_ID'              # threads.net/@YOUR_THREADS_ID
+  rss = true                                # show rss icon
+
+  # home page profile
+  avatar = 'https://avatars.githubusercontent.com/u/15502355'                 # gravatar email or image url
+  name = 'Xinhao Wang'
+  bio = 'Just an average software engineer.'
+
+
+  # misc
+  disableHLJS = true                        # disable highlight.js
+  disablePostNavigation = true              # disable post navigation
+  monoDarkIcon = true                       # show monochrome dark mode icon
+  gravatarCdn = 'GRAVATAR_CDN_LINK'         # e.g. 'https://cdn.v2ex.com/gravatar/'
+  math = true                               # enable KaTeX math typesetting globally
+  #graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
+
+  # giscus
+[params.giscus]
+  repo = 'signalw/signalw.github.io'                 # see https://giscus.app for more details
+  repoId = 'MDEwOlJlcG9zaXRvcnkxNDgwNTY1ODQ='
+  category = 'Ideas'
+  categoryId = 'DIC_kwDOCNMqCM4Ce48P'
+  mapping = 'pathname'
+  theme = 'light'
+  lang = 'en'

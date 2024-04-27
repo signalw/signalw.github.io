@@ -1,0 +1,479 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Install Ruby on CentOS with rbenv - SIGNALW</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="I haven&rsquo;t touched Ruby for a long time. Recently, when I wanted to clone a project on GitHub and build it locally, I found that Ruby was not even available on the newly installed CentOS. That is the reason why this article is written.
+The Ruby official website lists 4 different installation methods:
+Use package management tools, such as Ubuntu&rsquo;s apt-get, CentOS&rsquo;s yum, homebrew commonly used on macOS, etc. Use Ruby-specific installation programs, such as ruby-build, ruby-install, ." />
+  <meta name="author" content="Xinhao Wang" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.svg" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://avatars.githubusercontent.com/u/15502355" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/rss.svg" />
+  
+  
+
+  
+  
+
+  
+  
+  
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+  integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+  integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+  integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+  crossorigin="anonymous"
+></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () =>
+    renderMathInElement(document.body, {
+      
+      
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      
+      throwOnError: false,
+    }),
+  );
+</script>
+
+  
+  
+  
+
+  
+  <link rel="icon" href="http://localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.125.3">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="http://localhost:1313/"
+      >SIGNALW</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/signalw"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/xinhaowang"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="http://localhost:1313/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Install Ruby on CentOS with rbenv</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Jun 2, 2018</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>I haven&rsquo;t touched Ruby for a long time. Recently, when I wanted to clone a project on GitHub and build it locally, I found that Ruby was not even available on the newly installed CentOS. That is the reason why this article is written.</p>
+<p>The Ruby official website lists 4 different installation methods:</p>
+<ul>
+<li>Use package management tools, such as Ubuntu&rsquo;s apt-get, CentOS&rsquo;s yum, homebrew commonly used on macOS, etc.</li>
+<li>Use Ruby-specific installation programs, such as ruby-build, ruby-install, .exe files on windows, etc.</li>
+<li>Use rbenv, RVM and other management tools to support the installation and switching on different versions</li>
+<li>Download the Ruby tarball and manually compile and install it</li>
+</ul>
+<p>If you have the need to switch between multiple different versions of Ruby, rbenv should be a good choice, and based on various reviews, rbenv seems to be better than RVM, as of this writing.</p>
+<p>This is the official website of rbenv: <a href="https://github.com/rbenv/rbenv">https://github.com/rbenv/rbenv</a>, with its source code and very detailed instructions.</p>
+<p>The machine I am using is on CentOS 7, but the installation process should be pretty similar for other Linux distros.</p>
+<p>The first step is to clone the source code into the local <code>~/.rbenv</code> directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+</span></span><span style="display:flex;"><span>Cloning into <span style="color:#e6db74">&#39;/home/centos/.rbenv&#39;</span>...
+</span></span><span style="display:flex;"><span>remote: Counting objects: 2714, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>remote: Total <span style="color:#ae81ff">2714</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">0</span> <span style="color:#f92672">(</span>delta 0<span style="color:#f92672">)</span>, pack-reused <span style="color:#ae81ff">2714</span>
+</span></span><span style="display:flex;"><span>Receiving objects: 100% <span style="color:#f92672">(</span>2714/2714<span style="color:#f92672">)</span>, 506.40 KiB | <span style="color:#ae81ff">0</span> bytes/s, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>Resolving deltas: 100% <span style="color:#f92672">(</span>1700/1700<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span></code></pre></div><p>This step is optional. Compiling the bash extension is mainly to speed up the operation of rbenv. An error may be reported but can be ignored. I found that I didn&rsquo;t even have gcc. No errors were reported after installation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd ~/.rbenv <span style="color:#f92672">&amp;&amp;</span> src/configure <span style="color:#f92672">&amp;&amp;</span> make -C src
+</span></span><span style="display:flex;"><span>warning: gcc not found; using CC<span style="color:#f92672">=</span>cc
+</span></span><span style="display:flex;"><span>aborted: compiler not found: cc
+</span></span><span style="display:flex;"><span>$ sudo yum install gcc
+</span></span><span style="display:flex;"><span>$ cd ~/.rbenv <span style="color:#f92672">&amp;&amp;</span> src/configure <span style="color:#f92672">&amp;&amp;</span> make -C src
+</span></span><span style="display:flex;"><span>make: Entering directory <span style="color:#e6db74">`</span>/home/centos/.rbenv/src<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc -fPIC     -c -o realpath.o realpath.c
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc -shared -Wl,-soname,../libexec/rbenv-realpath.dylib  -o ../libexec/rbenv-realpath.dylib realpath.o
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">make: Leaving directory `/home/centos/.rbenv/src&#39;</span>
+</span></span></code></pre></div><p>The second step is to add environment variables. Note that if it is Ubuntu, you should edit <code>.bashrc</code> instead of <code>.bash_profile</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ echo <span style="color:#e6db74">&#39;export PATH=&#34;$HOME/.rbenv/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.bash_profile
+</span></span></code></pre></div><p>The third step is initialization and add the eval statement to <code>.bash_profile</code> according to the prompts.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ~/.rbenv/bin/rbenv init
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load rbenv automatically by appending</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># the following to ~/.bash_profile:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>rbenv init -<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ echo <span style="color:#e6db74">&#39;eval &#34;$(rbenv init -)&#34;&#39;</span> &gt;&gt; ~/.bash_profile
+</span></span></code></pre></div><p>The fourth step is to restart the shell, or run <code>source ~/.bash_profile</code> directly in the current session to make the new environment variables take effect.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>source ~/.bash_profile
+</span></span></code></pre></div><p>Step 5: Use <code>rbenv-doctor</code> to verify whether the installation is successful. You can see a reminder that a command is not installed. We will install it in the next step.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+</span></span><span style="display:flex;"><span>Checking <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>rbenv<span style="color:#e6db74">&#39; in PATH: /home/centos/.rbenv/bin/rbenv
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Checking for rbenv shims in PATH: OK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Checking `rbenv install&#39;</span> support: which: no rbenv-install in <span style="color:#f92672">(</span>/home/centos/.rbenv/shims:/home/centos/.rbenv/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/centos/.local/bin:/home/centos/bin:/home/centos/.local/bin:/home/centos/bin<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>bash: line 114: : command not found
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>Counting installed Ruby versions: none
+</span></span><span style="display:flex;"><span>  There aren<span style="color:#e6db74">&#39;t any Ruby versions installed under `/home/centos/.rbenv/versions&#39;</span>.
+</span></span><span style="display:flex;"><span>  You can install Ruby versions like so: rbenv install 2.2.4
+</span></span><span style="display:flex;"><span>Checking RubyGems settings: OK
+</span></span><span style="display:flex;"><span>Auditing installed plugins: OK
+</span></span></code></pre></div><p>Step 6: Install ruby-build</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>rbenv root<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>/plugins
+</span></span><span style="display:flex;"><span>$ git clone https://github.com/rbenv/ruby-build.git <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>rbenv root<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>/plugins/ruby-build
+</span></span><span style="display:flex;"><span>Cloning into <span style="color:#e6db74">&#39;/home/centos/.rbenv/plugins/ruby-build&#39;</span>...
+</span></span><span style="display:flex;"><span>remote: Counting objects: 8867, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>remote: Compressing objects: 100% <span style="color:#f92672">(</span>19/19<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>remote: Total <span style="color:#ae81ff">8867</span> <span style="color:#f92672">(</span>delta 8<span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">18</span> <span style="color:#f92672">(</span>delta 2<span style="color:#f92672">)</span>, pack-reused <span style="color:#ae81ff">8843</span>
+</span></span><span style="display:flex;"><span>Receiving objects: 100% <span style="color:#f92672">(</span>8867/8867<span style="color:#f92672">)</span>, 1.86 MiB | <span style="color:#ae81ff">0</span> bytes/s, <span style="color:#66d9ef">done</span>.
+</span></span><span style="display:flex;"><span>Resolving deltas: 100% <span style="color:#f92672">(</span>5684/5684<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+</span></span></code></pre></div><p>No additional operations are required after cloning from GitHub to local. Next, let’s verify whether the installation is successful.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+</span></span><span style="display:flex;"><span>Checking <span style="color:#66d9ef">for</span> <span style="color:#e6db74">`</span>rbenv<span style="color:#e6db74">&#39; in PATH: /home/centos/.rbenv/bin/rbenv
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Checking for rbenv shims in PATH: OK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Checking `rbenv install&#39;</span> support: which: no rbenv-install in <span style="color:#f92672">(</span>/home/centos/.rbenv/shims:/home/centos/.rbenv/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/centos/.local/bin:/home/centos/bin:/home/centos/.local/bin:/home/centos/bin<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>/home/centos/.rbenv/plugins/ruby-build/bin/rbenv-install <span style="color:#f92672">(</span>ruby-build 20180601<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Counting installed Ruby versions: none
+</span></span><span style="display:flex;"><span>  There aren<span style="color:#e6db74">&#39;t any Ruby versions installed under `/home/centos/.rbenv/versions&#39;</span>.
+</span></span><span style="display:flex;"><span>  You can install Ruby versions like so: rbenv install 2.2.4
+</span></span><span style="display:flex;"><span>Checking RubyGems settings: OK
+</span></span><span style="display:flex;"><span>Auditing installed plugins: OK
+</span></span></code></pre></div><p>At this point, the rbenv installation is complete! Now let&rsquo;s install and switch between different versions of Ruby as we like! Use <code>rbenv install -l</code> to list all available Ruby versions. The list is too long so I won&rsquo;t post everything here.</p>
+<p>Let&rsquo;s install 2.3.0 first. However, it returns error again&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ rbenv install 2.3.0
+</span></span><span style="display:flex;"><span>Downloading ruby-2.3.0.tar.bz2...
+</span></span><span style="display:flex;"><span>-&gt; https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.bz2
+</span></span><span style="display:flex;"><span>Installing ruby-2.3.0...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BUILD FAILED <span style="color:#f92672">(</span>CentOS Linux <span style="color:#ae81ff">7</span> using ruby-build 20180601<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Inspect or clean up the working tree at /tmp/ruby-build.20180602035853.9426
+</span></span><span style="display:flex;"><span>Results logged to /tmp/ruby-build.20180602035853.9426.log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Last <span style="color:#ae81ff">10</span> log lines:
+</span></span><span style="display:flex;"><span>The Ruby openssl extension was not compiled.
+</span></span><span style="display:flex;"><span>The Ruby readline extension was not compiled.
+</span></span><span style="display:flex;"><span>The Ruby zlib extension was not compiled.
+</span></span><span style="display:flex;"><span>ERROR: Ruby install aborted due to missing extensions
+</span></span><span style="display:flex;"><span>Try running <span style="color:#e6db74">`</span>yum install -y openssl-devel readline-devel zlib-devel<span style="color:#e6db74">`</span> to fetch missing dependencies.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Configure options used:
+</span></span><span style="display:flex;"><span>  --prefix<span style="color:#f92672">=</span>/home/centos/.rbenv/versions/2.3.0
+</span></span><span style="display:flex;"><span>  LDFLAGS<span style="color:#f92672">=</span>-L/home/centos/.rbenv/versions/2.3.0/lib
+</span></span><span style="display:flex;"><span>  CPPFLAGS<span style="color:#f92672">=</span>-I/home/centos/.rbenv/versions/2.3.0/include
+</span></span></code></pre></div><p>It turns out that some dependency packages are missing. Try again after installing these.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo yum install -y openssl-devel readline-devel zlib-devel
+</span></span><span style="display:flex;"><span>$ rbenv install 2.3.0
+</span></span><span style="display:flex;"><span>Downloading ruby-2.3.0.tar.bz2...
+</span></span><span style="display:flex;"><span>-&gt; https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.bz2
+</span></span><span style="display:flex;"><span>Installing ruby-2.3.0...
+</span></span><span style="display:flex;"><span>Installed ruby-2.3.0 to /home/centos/.rbenv/versions/2.3.0
+</span></span></code></pre></div><p>After a couple of minutes, it finally worked! Let&rsquo;s install 2 more versions. Then use <code>rbenv versions</code> to list all locally installed Ruby versions. If you want to switch to a specific version, just use <code>rbenv global &lt;version number&gt;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ rbenv install 2.5.0
+</span></span><span style="display:flex;"><span>Downloading ruby-2.5.0.tar.bz2...
+</span></span><span style="display:flex;"><span>-&gt; https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.bz2
+</span></span><span style="display:flex;"><span>Installing ruby-2.5.0...
+</span></span><span style="display:flex;"><span>Installed ruby-2.5.0 to /home/centos/.rbenv/versions/2.5.0
+</span></span><span style="display:flex;"><span>$ rbenv install 2.4.0
+</span></span><span style="display:flex;"><span>Downloading ruby-2.4.0.tar.bz2...
+</span></span><span style="display:flex;"><span>-&gt; https://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.0.tar.bz2
+</span></span><span style="display:flex;"><span>Installing ruby-2.4.0...
+</span></span><span style="display:flex;"><span>Installed ruby-2.4.0 to /home/centos/.rbenv/versions/2.4.0
+</span></span><span style="display:flex;"><span>$ rbenv global 2.3.0
+</span></span><span style="display:flex;"><span>$ rbenv versions
+</span></span><span style="display:flex;"><span>* 2.3.0 <span style="color:#f92672">(</span>set by /home/centos/.rbenv/version<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  2.4.0
+</span></span><span style="display:flex;"><span>  2.5.0
+</span></span><span style="display:flex;"><span>$ ruby -v
+</span></span><span style="display:flex;"><span>ruby 2.3.0p0 <span style="color:#f92672">(</span>2015-12-25 revision 53290<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>x86_64-linux<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>I didn&rsquo;t encounter any problems when installing the stable versions, but when installing the non-stable versions as well as jruby, I ran into errors again. It&rsquo;s probably due to missing dependencies again.</p>
+<p>There are detailed instructions on uninstalling Ruby and uninstalling rbenv in the official documentation, so I will not go into details here.</p>
+</section>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <div class="giscus mt-24"></div>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="signalw/signalw.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkxNDgwNTY1ODQ="
+    data-category="Ideas"
+    data-category-id="DIC_kwDOCNMqCM4Ce48P"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script>
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">SIGNALW</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>
